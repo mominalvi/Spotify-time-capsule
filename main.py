@@ -1,10 +1,14 @@
+import os
+
 import requests
 from bs4 import BeautifulSoup
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from dotenv import load_dotenv
+load_dotenv()
 
-CLIENT_ID = "e493958b18d8498a8a56b5fa6698d0ef"
-CLIENT_SECRET = "bc43cd76140d4ebc85f1f89020a7d5ae"
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
 date = input("What year do you want to travel to? Type the date in this format YYYY-MM-DD: ")
 
@@ -28,8 +32,6 @@ for song in top_songs_list:
     except IndexError:
         print(f"{song} doesn't exist in Spotify. Skipped.")
 
-print(uri_list)
-print(len(uri_list))
 user = sp.current_user()
 user_id = user["id"]
 
